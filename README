@@ -10,5 +10,16 @@
  Plan for first iteration
 
  -Post an text and immediately push it to a client
+ -Add juggernaut
+	make a test page
+		subscribes to juggernaut
+		register for callbacks in js, append to page when rcv data
+	just publish to that channel
 
-This file was modified by PyCharm 2.0.1 for binding GitHub repository
+
+ Dependencies
+	node: https://github.com/joyent/node/wiki/Installation
+	npm: just needed to install juggernaut
+	juggernaut: after you have npm do "npm install juggernaut"
+	redis: check their website or use brew
+	redis-py: use pip or "sudo easy_install redis"
