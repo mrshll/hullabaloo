@@ -44,6 +44,6 @@ def push (data):
           "data": data
     }
     r = redis.Redis()
-    r.publish("jugernaut", json.dumps(msg))
+    r.publish("jugernaut", json.dumps(post_msg))
     print( "Sent: {}".format(data) )
 
