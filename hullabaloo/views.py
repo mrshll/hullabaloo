@@ -6,6 +6,9 @@ from django.template.context import RequestContext
 from posts.forms import NewForm
 from posts.models import *
 
+import redis
+import json
+
 admin.autodiscover()
 
 def index (request):
@@ -31,9 +34,16 @@ def new (request):
 
 
 def push (data):
-    HOST, PORT = "localhost", 9023
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.sendto(data + "\n", (HOST, PORT))
+#    HOST, PORT = "localhost", 9023
+#    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#    sock.sendto(data + "\n", (HOST, PORT))
 
+    # juggernaut way
+    post_msg = {
+          "channels": ["test"],
+          "data": data
+    }
+    r = redis.Redis()
+    r.publish("jugernaut", json.dumps(msg)
     print "Sent: {}".format(data)
 
