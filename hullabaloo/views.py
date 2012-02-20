@@ -6,8 +6,8 @@ from django.template.context import RequestContext
 from posts.forms import NewForm
 from posts.models import *
 
-#import redis
-#import json
+import redis
+import json
 
 admin.autodiscover()
 
@@ -39,11 +39,11 @@ def push (data):
 #    sock.sendto(data + "\n", (HOST, PORT))
 
     # juggernaut way
-#   post_msg = {
-#          "channels": ["test"],
-#          "data": data
-#    }
-#    r = redis.Redis()
-#    r.publish("jugernaut", json.dumps(msg))
+    post_msg = {
+          "channels": ["test"],
+          "data": data
+    }
+    r = redis.Redis()
+    r.publish("jugernaut", json.dumps(msg))
     print( "Sent: {}".format(data) )
 
