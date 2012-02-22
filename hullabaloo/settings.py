@@ -21,7 +21,7 @@ DATABASES = {
     }
 }
 
-
+# better way to do this that won't break if the dir structure changes?
 PROJECT_ROOT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Local time zone for this installation. Choices can be found here:
@@ -114,8 +114,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+# hullabaloo is the app with the same name as our project...
 ROOT_URLCONF = 'hullabaloo.urls'
-
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT_PATH,"templates")
