@@ -6,10 +6,12 @@
 <head>
     <title>Hullabaloo</title>
     <script type="text/javascript" src="{% get_static_prefix %}js/jquery-1.7.1.js"></script>
+    <!-- Get our juggernaut js file, TODO: change this for production -->
     <script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}js/jug_test.js"></script>
 </head>
 <body>
-<ul>
+<ul id="posts">
 {% for post in posts %}
     <li>{{ post.body }}</li>
 {% endfor %}

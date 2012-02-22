@@ -1,6 +1,6 @@
 import socket
 from django.contrib import admin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from posts.forms import NewForm
@@ -24,8 +24,7 @@ def new (request):
             new_post.save()
             push(new_post.body)
             print(new_post.body)
-            return HttpResponseRedirect('/')
-        return render_to_response('new.html')
+            return HttpResponse("Success")
     else:
         form = NewForm()
         data = {'form':form}
