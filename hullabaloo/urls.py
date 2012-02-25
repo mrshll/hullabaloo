@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
      url(r'^$', 'hullabaloo.views.index', name='index'),
-     url(r'^new/$', 'hullabaloo.views.new', name='new'),
+     url(r'^channel/$', include('channel.urls'))
      url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
      url(r'^static/(?P<path>.*)$', 'django.views.static.serve',

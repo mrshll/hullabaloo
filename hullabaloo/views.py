@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from posts.forms import NewForm
-from posts.models import *
+from channel.forms import NewForm
+from channel.models import *
 
 import redis
 import json
@@ -14,9 +14,9 @@ admin.autodiscover()
 def index (request):
     posts = Post.objects.all()
     print(posts)
-    return render_to_response('index.html', {'posts':posts})
+    #return render_to_response('index.html', {'channels':channels})
 
-def new (request):
+def new_post (request):
     if request.POST:
         form = NewForm(request.POST)
         if form.is_valid():
