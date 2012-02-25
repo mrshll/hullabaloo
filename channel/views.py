@@ -1,4 +1,7 @@
+from django.shortcuts import render_to_response
 
+def index (request):
+    return render_to_response("home.html")
 
-def index(request):
-    posts =
+def new_post (request):
+    return render_to_response("home.html")
