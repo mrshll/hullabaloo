@@ -1,5 +1,6 @@
 import socket
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
@@ -12,9 +13,17 @@ import json
 admin.autodiscover()
 
 def index (request):
-    posts = Post.objects.all()
-    print(posts)
-    return render_to_response('index.html', {'posts':posts})
+    c = RequestContext(request)
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home/')
+    return render_to_response('index.html')
+
+@login_required
+def home (request):
+    user_profile = request.user.get_profile()
+    return render_to_response('home.html', {'user': request.user,
+                                            'userprofile': user_profile,
+    }, context_instance=RequestContext(request))
 
 def new (request):
     if request.POST:
