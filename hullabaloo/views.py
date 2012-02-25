@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from posts.forms import NewForm
-from posts.models import *
+from channel.forms import NewForm
+from channel.models import *
 
 import redis
 import json
@@ -25,7 +25,7 @@ def home (request):
                                             'userprofile': user_profile,
     }, context_instance=RequestContext(request))
 
-def new (request):
+def new_post (request):
     if request.POST:
         form = NewForm(request.POST)
         if form.is_valid():

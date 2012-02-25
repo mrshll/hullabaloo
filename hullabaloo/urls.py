@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from hullabaloo import settings
 
@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     # our routes
     url(r'^$', 'hullabaloo.views.index', name='index'),
-    url(r'^new/$', 'hullabaloo.views.new', name='new'),
+    url(r'^channel/', include('channel.urls')),
     url(r'^profile/', include('userprofile.urls')),
     url(r'^home/', 'hullabaloo.views.home'),
 
