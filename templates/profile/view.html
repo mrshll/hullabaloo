@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="hero-unit">
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <form action="{% url show.views.add %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+    </div>
+{% endblock %}
