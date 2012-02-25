@@ -20,9 +20,11 @@ def index (request):
 
 @login_required
 def home (request):
+    channel_list = Channel.objects.all()
     user_profile = request.user.get_profile()
     return render_to_response('home.html', {'user': request.user,
                                             'userprofile': user_profile,
+                                            'channel_list': channel_list,
     }, context_instance=RequestContext(request))
 
 def new_post (request):

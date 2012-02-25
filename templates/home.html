@@ -25,5 +25,10 @@
 
     <div class="hero-unit">
         <h2>Channels</h2>
+        <ul>
+        {% for channel in channel_list %}
+            <li> {{ channel }} </li>
+        {% endfor %}
+        </ul>
     </div>
 {% endblock %}
