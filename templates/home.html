@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#add_show_button').click(function() {
+            var url = "";
+            var callback = add_show_callback;
+            $.post(url,{
+                "show_name":$('#id_show_name').val(),
+                "csrfmiddlewaretoken":"{{csrf_token}}"
+            },callback);
+        });
+    });
+
+    function add_show_callback(response){
+        $(response).hide().appendTo("#shows ul").fadeIn('fast');
+    }
+
+    $(document).ajaxStart(function() {
+        $('#spinner').show();
+    }).ajaxStop(function() {
+        $('#spinner').hide();
+    });
+</script>
+
+    <div class="hero-unit">
+        <h2>Channels</h2>
+    </div>
+{% endblock %}
