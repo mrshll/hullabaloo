@@ -27,7 +27,7 @@
         <h2>Channels</h2>
         <ul>
         {% for channel in channel_list %}
-            <li> {{ channel }} </li>
+            <li> <a href="/channel/{{ channel }}"> {{ channel }} </a> </li>
         {% endfor %}
         </ul>
     </div>
