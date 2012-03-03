@@ -1,3 +1,5 @@
+from hullabaloo.settings import STATIC_ROOT
+
 __author__ = 'mmoutenot'
 
 from django import forms
@@ -5,3 +7,4 @@ from django import forms
 
 class NewForm(forms.Form):
     body = forms.CharField(max_length=400)
+    image = forms.ImageField()
