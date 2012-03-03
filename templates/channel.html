@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- load js which subscribes to this page's channel -->
+<script type="text/javascript">
+    jug_channel = "{{ channel }}";
+</script>
+<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+<script src="{% static "js/jug_test.js" %}"></script>
+
+<!-- new post form -->
+<form action="." method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit'/>
+</form>
+
+<!-- Display the posts the channel has see so far -->
+<ul id="posts">
+    {% for post in posts %}
+    <li> {{ post.body }} </li>
+    {% endfor %}
+</ul>
+
+
+
+{% endblock %}
