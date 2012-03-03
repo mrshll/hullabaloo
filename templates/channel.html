@@ -10,7 +10,7 @@
 <script src="{% static "js/jug_test.js" %}"></script>
 
 <!-- new post form -->
-<form action="." method="POST" enctype="multipart/form-data">
+<form action="channel/{{ channel }}/post/new" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type='submit'/>
