@@ -1,4 +1,5 @@
 from django.db import models
+from hullabaloo.settings import STATIC_URL
 
 
 class Channel(models.Model):
@@ -8,6 +9,7 @@ class Channel(models.Model):
         return self.name
 
 class Post(models.Model):
+    image = models.ImageField(upload_to=(STATIC_URL+"user/images/"), height_field=None, width_field=None, max_length=180, null=True, blank=True)
     body = models.TextField(max_length=500, verbose_name='posts body')
     channel = models.ForeignKey(Channel)
 
