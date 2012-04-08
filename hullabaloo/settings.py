@@ -148,9 +148,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'registration',
     'south',
+    'utility',
 
     'userprofile',
     'channel',
+
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

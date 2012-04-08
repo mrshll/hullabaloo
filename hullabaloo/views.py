@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from channel.forms import NewForm
 from channel.models import *
+from utility import uniquify
 
 import redis
 import json
@@ -21,8 +22,10 @@ def index (request):
 @login_required
 def home (request):
     channel_list = Channel.objects.all()
-    channel_list_sort_by_pop = # sort by a channel's views
-        sorted(channel_list, key=lambda channel : channel.views)
+    recent_views = \
+        Views.objects.filter(time__gte=datetime.now()-timedelta(days=2)).channels
+    print(recent_views)
+
     user_profile = request.user.get_profile()
     return render_to_response('home.html', {'user': request.user,
                                             'userprofile': user_profile,

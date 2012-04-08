@@ -9,9 +9,11 @@ import redis
 import json
 from channel.forms import NewForm
 from channel.models import Post, Channel
+from django.auth import User
 
 @login_required
 def show (request, channel_name):
+
     channel_name = channel_name.replace('%20',' ')
     print(channel_name)
     try:

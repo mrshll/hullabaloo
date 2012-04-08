@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from hullabaloo.settings import STATIC_URL
 
 class Channel(models.Model):
@@ -7,8 +8,9 @@ class Channel(models.Model):
         return self.name
 
 class View(models.Model):
+    user    = models.ForeignKey(User)
     channel = models.ForeignKey(Channel)
-    stamp = models.DateTimeField()
+    time    = models.DateTimeField()
 
 class Post(models.Model):
     image   = models.ImageField(upload_to=(STATIC_URL+"user/images/"),
