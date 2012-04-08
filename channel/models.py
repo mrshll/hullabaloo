@@ -10,7 +10,7 @@ class Channel(models.Model):
 class View(models.Model):
     user    = models.ForeignKey(User)
     channel = models.ForeignKey(Channel)
-    time    = models.DateTimeField()
+    time    = models.DateTimeField(auto_now=True)
 
 class Post(models.Model):
     image   = models.ImageField(upload_to=(STATIC_URL+"user/images/"),
