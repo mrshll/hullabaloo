@@ -7,10 +7,10 @@
     jug_channel = "{{ channel }}";
 </script>
 <script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
-<script src="{% static "js/jug_test.js" %}"></script>
+<script src="{% static "js/channel.js" %}"></script>
 
 <!-- new post form -->
-<form action="channel/{{ channel }}/post/new" method="POST" enctype="multipart/form-data">
+<form action="/channel/{{ channel }}/post/new" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type='submit'/>
