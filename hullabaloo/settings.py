@@ -151,6 +151,7 @@ INSTALLED_APPS = (
 
     'userprofile',
     'channel',
+
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

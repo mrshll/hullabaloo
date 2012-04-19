@@ -1,4 +1,7 @@
 import socket
+import redis
+import json
+from datetime import timedelta, datetime
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,9 +9,9 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from channel.forms import NewForm
 from channel.models import *
+from collections import defaultdict
 
-import redis
-import json
+from uniq import uniquify
 
 admin.autodiscover()
 
@@ -20,11 +23,16 @@ def index (request):
 
 @login_required
 def home (request):
-    channel_list = Channel.objects.all()
+    channel_hash = defaultdict(int)
+    recent_views = \
+        View.objects.filter(time__gte=datetime.now()-timedelta(days=2))
+    for view in recent_views:
+        channel_hash[view.channel] += 1
+    sorted_channels= sorted(channel_hash)
     user_profile = request.user.get_profile()
     return render_to_response('home.html', {'user': request.user,
                                             'userprofile': user_profile,
-                                            'channel_list': channel_list,
+                                            'channel_list': sorted_channels,
     }, context_instance=RequestContext(request))
 
 def new_post (request):

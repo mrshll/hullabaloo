@@ -7,18 +7,25 @@ from django.core.exceptions import MultipleObjectsReturned
 
 import redis
 import json
+from datetime import datetime, timedelta
 from channel.forms import NewForm
-from channel.models import Post, Channel
+from channel.models import *
 
 @login_required
 def show (request, channel_name):
     print(channel_name)
     channel_name = channel_name.replace('-',' ')
     try:
-        channel = Channel.objects.get(name=channel_name)
+        channel     = Channel.objects.get(name=channel_name)
     except MultipleObjectsReturned:
         return render_to_response('error.html',
                 {'error', 'multiple channels with name' + channel_name})
+    new_view, c = \
+            View.objects.get_or_create(channel=channel, user=request.user)
+    if not c:
+        new_view.time = datetime.now()
+    new_view.save()
+
     posts = Post.objects.filter(channel=channel.id)
     form = NewForm()
     return render_to_response('channel.html',
