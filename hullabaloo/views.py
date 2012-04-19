@@ -31,7 +31,7 @@ def home (request):
     sorted_channels = sorted(channel_hash)[:5]
     images = []
     for c in sorted_channels:
-        top_image_post =
+        top_image_post = \
             Post.objects.filter(channel = c,
                                 image__isnull = False).order_by('-rating')[:1]
     user_profile = request.user.get_profile()
