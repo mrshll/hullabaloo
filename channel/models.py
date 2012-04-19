@@ -13,7 +13,7 @@ class View(models.Model):
     time    = models.DateTimeField(auto_now=True)
 
 class Post(models.Model):
-    image   = models.ImageField(upload_to=(MEDIA_ROOT +"post/images/"),
+    image   = models.ImageField(upload_to=(MEDIA_ROOT +"/post/images/"),
                                 height_field=None, width_field=None,
                                 max_length=180, null=True, blank=True)
     body    = models.TextField(max_length=500, verbose_name='posts body')

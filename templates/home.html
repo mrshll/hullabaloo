@@ -23,24 +23,24 @@
         $('#spinner').hide();
     });
 </script>
-
     <div class="hero-unit">
+        <a class="btn" href="/channel/new/">New Channel</a>
         <ul>
         {% for channel in channel_list %}
             <li> <a href="/channel/{{ channel }}"> {{ channel }} </a> </li>
         {% endfor %}
         </ul>
-    </div>
-
-    <div class="row">
-        <div class="span12">
-            <img src = "{{ images.0 }}">
-            <div class="row">
-                <div class="span6"><img src = "{{ images.1 }}"></div>
-                <div class="span6"><img src = "{{ images.2 }}"></div>
+        <div class="row">
+            <div class="span12">
+                <img src = "{{ images.0 }}">
+                <div class="row">
+                    <div class="span6"><img src = "{{ images.1 }}"></div>
+                    <div class="span6"><img src = "{{ images.2 }}"></div>
+                </div>
             </div>
         </div>
     </div>
+
 
 
 {% endblock %}

@@ -1,6 +1,7 @@
 import socket
 import redis
 import json
+import operator
 from datetime import timedelta, datetime
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -24,17 +25,21 @@ def index (request):
 @login_required
 def home (request):
     channel_hash = defaultdict(int)
+    images = []
+    sorted_channels = []
     recent_views = \
         View.objects.filter(time__gte=datetime.now()-timedelta(days=2))
     for view in recent_views:
         channel_hash[view.channel] += 1
-    sorted_channels = sorted(channel_hash)[:5]
-    images = []
-    for c in sorted_channels:
+    for c,k in sorted(channel_hash.iteritems(),
+                      key=operator.itemgetter(1)):
+        sorted_channels.append(c)
         top_image_post = \
             Post.objects.filter(channel = c,
                                 image__isnull = False).order_by('-rating')[:1]
+        images.append(top_image_post)
     user_profile = request.user.get_profile()
+    print sorted_channels, images
     return render_to_response('home.html', {'user': request.user,
                                             'userprofile' : user_profile,
                                             'channel_list': sorted_channels,
