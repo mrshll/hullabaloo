@@ -47,7 +47,7 @@ def new_post (request, channel_name):
     #make a new post in the channel
     post = Post(channel=channel,
             body=request.POST['body'],
-            image=request.FILES['image']); #need to check if image is there
+            image=request.FILES['image']);
     post.save()
 
     print(request.POST)
@@ -55,7 +55,8 @@ def new_post (request, channel_name):
     #push new post to clients
     post_msg = {
           'channels': [channel.name],
-          'data': post.body
+          'data':     post.body,
+          'image':    post.image.url,
     }
     r = redis.Redis()
     r.publish('juggernaut', json.dumps(post_msg))
