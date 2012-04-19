@@ -63,4 +63,13 @@ def new_post (request, channel_name):
 
     return HttpResponse('ok')
 
+@login_required
+def new_channel(request):
+    if request.method != 'POST':
+        return render_to_response('new_channel.html',
+                    context_instance=RequestContext(request))
+    else:
+       channel_name = request.POST['name']
+       channel, created = Channel.objects.get_or_create(name=channel_name)
+       return HttpResponseRedirect("/channel/" + channel_name)
 
