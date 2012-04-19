@@ -28,11 +28,17 @@ def home (request):
         View.objects.filter(time__gte=datetime.now()-timedelta(days=2))
     for view in recent_views:
         channel_hash[view.channel] += 1
-    sorted_channels= sorted(channel_hash)
+    sorted_channels = sorted(channel_hash)[:5]
+    images = []
+    for c in sorted_channels:
+        top_image_post =
+            Post.objects.filter(channel = c,
+                                image__isnull = False).order_by('-rating')[:1]
     user_profile = request.user.get_profile()
     return render_to_response('home.html', {'user': request.user,
-                                            'userprofile': user_profile,
+                                            'userprofile' : user_profile,
                                             'channel_list': sorted_channels,
+                                            'images'      : images,
     }, context_instance=RequestContext(request))
 
 def new_post (request):
