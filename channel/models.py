@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from hullabaloo.settings import STATIC_URL
+from hullabaloo.settings import STATIC_URL, MEDIA_ROOT
 
 class Channel(models.Model):
     name  = models.CharField(max_length=50, verbose_name='channel name')
